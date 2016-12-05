@@ -1,5 +1,7 @@
 = business_time
 
+Miovision Note: business_time Merged with https://github.com/bokmann/business_time/pull/89/files
+
 {<img src="https://secure.travis-ci.org/bokmann/business_time.png" />}[http://travis-ci.org/bokmann/business_time]
 
 ActiveSupport gives us some great helpers so we can do things like:
