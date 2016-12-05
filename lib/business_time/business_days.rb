@@ -16,7 +16,12 @@ module BusinessTime
       self.days <=> other.days
     end
 
+    def now
+      BusinessTime::Config.time_zone ? BusinessTime::Config.time_zone.now : Time.now
+    end
+
     def after(time = Time.current)
+      time = BusinessTime::Config.time_zone ? BusinessTime::Config.time_zone.parse(time.strftime('%Y-%m-%d %H:%M:%S %z')) : Time.parse(time.strftime('%Y-%m-%d %H:%M:%S %z'))
       days = @days
       while days > 0 || !time.workday?
         days -= 1 if time.workday?
@@ -32,8 +37,9 @@ module BusinessTime
 
     alias_method :from_now, :after
     alias_method :since, :after
-
+    
     def before(time = Time.current)
+      time = BusinessTime::Config.time_zone ? BusinessTime::Config.time_zone.parse(time.rfc822) : Time.parse(time.rfc822)
       days = @days
       while days > 0 || !time.workday?
         days -= 1 if time.workday?
